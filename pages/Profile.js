@@ -1,6 +1,4 @@
 import React from "react";
-// import Image from "../assets/images/scoop.png";
-// import "../style.css";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_USER } from "../utils/queries";
@@ -38,10 +36,11 @@ export default function Profile() {
   if (data) {
     user = data.user;
   }
-console.log(user)
+  console.log(user);
   return (
     <>
       <div className="container my-1">
+        {/* if user is logged in, display order history */}
         {user ? (
           <>
             <h2 style={styles.flavorites}>
@@ -51,24 +50,32 @@ console.log(user)
               {user.orders.map((order) => (
                 <div key={order._id} className="my-2">
                   <h3>
-                    {new Date(parseInt(order.purchaseDate)).toLocaleDateString()}
+                    {new Date(
+                      parseInt(order.purchaseDate)
+                    ).toLocaleDateString()}
                   </h3>
                   <div className="flex-row" style={styles.quote}>
-                    {order.products.map(({ _id, image, flavor, price }, index) => (
-                      <div
-                        key={index}
-                        className="md-3 px-1 py-1"
-                        style={styles.quote}
-                      >
-                        <Link to={`/products/${_id}`}>
-                          <img style={styles.scoop} alt={flavor} src={`/assets/productimages/${image}`} />
-                          <p>{flavor}</p>
-                        </Link>
-                        <div>
-                          <span>${price}</span>
+                    {order.products.map(
+                      ({ _id, image, flavor, price }, index) => (
+                        <div
+                          key={index}
+                          className="md-3 px-1 py-1"
+                          style={styles.quote}
+                        >
+                          <Link to={`/products/${_id}`}>
+                            <img
+                              style={styles.scoop}
+                              alt={flavor}
+                              src={`/assets/productimages/${image}`}
+                            />
+                            <p>{flavor}</p>
+                          </Link>
+                          <div>
+                            <span>${price}</span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      )
+                    )}
                   </div>
                 </div>
               ))}

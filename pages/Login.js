@@ -15,7 +15,6 @@ const styles = {
     textDecoration: "none",
   },
   submit: {
-    // color: "#FF007F",
     textDecoration: "none",
     fontFamily: "Syncopate",
     fontDisplay: "sans-serif",
